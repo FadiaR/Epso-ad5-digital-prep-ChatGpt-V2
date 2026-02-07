@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "EPSO Digital Skills (DigComp)",
+    "language": "L2"
+  },
+  "questions": [
+    {
+      "id": "DS-INFO-001",
+      "domain": "Information and data literacy",
+      "question": "Which action best improves the reliability of online information?",
+      "choices": [
+        "Rely on the first search result",
+        "Check author/date and cross-reference multiple sources",
+        "Share it to see if others agree",
+        "Use only social media posts"
+      ],
+      "answerIndex": 1,
+      "explanation": "Reliability increases with provenance checks and triangulation across independent sources."
+    },
+    {
+      "id": "DS-INFO-002",
+      "domain": "Information and data literacy",
+      "question": "In a spreadsheet, what is the safest first step before cleaning a large dataset?",
+      "choices": [
+        "Delete duplicates immediately",
+        "Sort the data to see patterns",
+        "Make a copy (backup) of the original data",
+        "Change number formats across all columns"
+      ],
+      "answerIndex": 2,
+      "explanation": "Always preserve the original dataset before applying irreversible operations."
+    },
+    {
+      "id": "DS-COMM-001",
+      "domain": "Communication and collaboration",
+      "question": "You need to co-edit a document with comments and version history. What is the best approach?",
+      "choices": [
+        "Send updated attachments by email after every change",
+        "Use a shared cloud document with permissions, comments, and version history",
+        "Ask one person to edit while others wait",
+        "Copy/paste edits into a chat thread"
+      ],
+      "answerIndex": 1,
+      "explanation": "Shared documents support concurrent editing, permissions, traceability, and recovery."
+    },
+    {
+      "id": "DS-COMM-002",
+      "domain": "Communication and collaboration",
+      "question": "A colleague shares a file link. What is a good practice before forwarding it externally?",
+      "choices": [
+        "Forward it immediately if it works",
+        "Check the sharing permissions and whether the link exposes sensitive content",
+        "Download it and re-upload it publicly",
+        "Convert it to an image and send it"
+      ],
+      "answerIndex": 1,
+      "explanation": "Verify access controls and content sensitivity to prevent unintended disclosure."
+    },
+    {
+      "id": "DS-CREATE-001",
+      "domain": "Digital content creation",
+      "question": "What is the best way to ensure a presentation remains readable on a projector?",
+      "choices": [
+        "Use small text to fit more content",
+        "Use high contrast and limit text per slide",
+        "Use many animations to keep attention",
+        "Use low-contrast colors to look modern"
+      ],
+      "answerIndex": 1,
+      "explanation": "Projectors and room lighting reduce legibility; contrast and simplicity improve readability."
+    },
+    {
+      "id": "DS-CREATE-002",
+      "domain": "Digital content creation",
+      "question": "When creating a document to be reused by others, what is the most effective step?",
+      "choices": [
+        "Use random formatting so it stands out",
+        "Define styles (headings, body text) to ensure consistency",
+        "Disable spellcheck",
+        "Avoid templates and reuse"
+      ],
+      "answerIndex": 1,
+      "explanation": "Styles and templates enforce consistency and make updates scalable."
+    },
+    {
+      "id": "DS-SAFE-001",
+      "domain": "Safety",
+      "question": "A colleague asks you to share a file containing personal data via a public link. What is the safest default?",
+      "choices": [
+        "Share the public link immediately",
+        "Encrypt the file but keep the link public",
+        "Use restricted access (named users) and least-privilege permissions",
+        "Upload it to a forum with a password"
+      ],
+      "answerIndex": 2,
+      "explanation": "Least privilege + restricted access reduces leakage risk and improves accountability."
+    },
+    {
+      "id": "DS-SAFE-002",
+      "domain": "Safety",
+      "question": "Which password practice is generally the strongest?",
+      "choices": [
+        "Reuse a complex password everywhere",
+        "Use a long unique passphrase and a password manager",
+        "Change passwords daily",
+        "Use your name plus a number"
+      ],
+      "answerIndex": 1,
+      "explanation": "Unique long passphrases plus a manager reduce reuse risk and are easier to maintain."
+    },
+    {
+      "id": "DS-PROB-001",
+      "domain": "Problem solving",
+      "question": "A spreadsheet formula returns an error after you copy it down. What is the most likely fix?",
+      "choices": [
+        "Convert the sheet to PDF",
+        "Use absolute/relative references appropriately (e.g., $A$1 vs A1)",
+        "Increase the font size",
+        "Disable automatic calculation"
+      ],
+      "answerIndex": 1,
+      "explanation": "Copying formulas often requires adjusting cell references to preserve intended references."
+    },
+    {
+      "id": "DS-PROB-002",
+      "domain": "Problem solving",
+      "question": "A video meeting has echo and feedback. What is a good first troubleshooting step?",
+      "choices": [
+        "Increase speaker volume to overpower the echo",
+        "Ask everyone to unmute",
+        "Identify a participant using speakers and switch them to headphones or mute their speakers",
+        "Turn off the camera"
+      ],
+      "answerIndex": 2,
+      "explanation": "Echo is commonly caused by a mic picking up the speaker output; headphones/muting fixes it."
+    }
+  ]
+}

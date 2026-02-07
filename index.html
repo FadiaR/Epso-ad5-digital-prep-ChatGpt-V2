@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EPSO Digital Skills — Revision</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#004494" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">EU</div>
+      <div>
+        <div class="title">EPSO — Digital Skills</div>
+        <div class="subtitle">Entraînement • Examen • Focus 60 min/jour</div>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button id="btnOpenProgress" class="btn btn-ghost">Progress</button>
+      <button id="btnReset" class="btn btn-ghost" title="Réinitialiser données locales">Reset</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- FOCUS + DAILY PLAN -->
+    <section class="card" id="focusCard">
+      <div class="focus-row">
+        <div class="focus-left">
+          <div class="kicker">Objectif quotidien</div>
+          <div class="big" id="focusTodayText">Aujourd’hui : 0 min / 60 min</div>
+          <div class="muted" id="streakText">Streak : 0 • Best : 0</div>
+
+          <div class="notice-row">
+            <a class="link" href="./docs/notice_of_competition.pdf" target="_blank" rel="noopener">
+              Notice of competition (PDF)
+            </a>
+            <span class="muted small">— ajoute le PDF dans <code>/docs</code>.</span>
+          </div>
+        </div>
+
+        <div class="focus-right">
+          <div class="timer bigtimer" id="focusTimer">60:00</div>
+
+          <div class="focus-actions">
+            <button class="btn btn-primary" id="btnDailyPlan">Plan du jour (60 min)</button>
+            <button class="btn" id="btnFocusStart">Focus</button>
+            <button class="btn" id="btnFocusPause" disabled>Pause</button>
+            <button class="btn btn-ghost" id="btnFocusStop" disabled>Stop</button>
+          </div>
+
+          <div id="planStatus" class="muted small hidden"></div>
+          <div class="row tiny">
+            <button class="btn btn-ghost hidden" id="btnPlanSkip">Passer l’étape</button>
+            <button class="btn btn-ghost hidden" id="btnPlanStop">Arrêter le plan</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="progressbar"><div id="focusFill" class="fill"></div></div>
+      <div class="muted small">
+        Le Focus Timer cumule votre temps de travail du jour (streak si ≥ 60 min).
+      </div>
+    </section>
+
+    <!-- SETUP -->
+    <section id="setup" class="card">
+      <h1>Configurer une session</h1>
+
+      <div class="grid">
+        <div class="field">
+          <label>Mode</label>
+          <select id="modeSelect">
+            <option value="exam">Examen (corrigé à la fin)</option>
+            <option value="practice">Entraînement (feedback immédiat)</option>
+          </select>
+          <div class="hint">Le format exact (durée, nombre de questions, seuil) doit être vérifié sur la notice que tu ajoutes.</div>
+        </div>
+
+        <div class="field">
+          <label>Nombre de questions</label>
+          <input id="countInput" type="number" min="1" step="1" value="40" />
+        </div>
+
+        <div class="field">
+          <label>Temps (minutes)</label>
+          <input id="timeInput" type="number" min="0" step="1" value="30" />
+          <div class="hint">0 = pas de chrono.</div>
+        </div>
+
+        <div class="field">
+          <label class="inline">
+            <input id="shuffleToggle" type="checkbox" checked />
+            Mélanger les questions
+          </label>
+        </div>
+
+        <div class="field">
+          <label>Domaine DigComp</label>
+          <select id="domainSelect">
+            <option value="">Tous</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="inline">
+            <input id="onlyWrongToggle" type="checkbox" />
+            Réviser uniquement mes erreurs
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="inline">
+            <input id="tapNextToggle" type="checkbox" checked />
+            Tap-to-next (entraînement)
+          </label>
+        </div>
+
+        <div class="field">
+          <label class="inline">
+            <input id="strictToggle" type="checkbox" />
+            Simulation stricte (pas de retour arrière + UI épurée)
+          </label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="btnStart" class="btn btn-primary">Démarrer</button>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="card hidden">
+      <div class="quiz-head">
+        <div class="progress">
+          <div id="progressText" class="progress-text">Question 1 / 40</div>
+          <div class="progressbar"><div id="progressFill" class="fill"></div></div>
+        </div>
+
+        <div class="right">
+          <div id="sessionTimer" class="timer hidden">30:00</div>
+          <button id="btnQuit" class="btn btn-ghost">Quitter</button>
+        </div>
+      </div>
+
+      <div class="meta-row">
+        <div id="questionMeta" class="meta"></div>
+
+        <div class="qtools">
+          <button id="btnFlag" class="btn btn-ghost">☆ Flag</button>
+          <button id="btnNote" class="btn btn-ghost">Note</button>
+        </div>
+      </div>
+
+      <div id="questionText" class="question"></div>
+      <div id="choices" class="choices"></div>
+
+      <div id="feedback" class="feedback hidden"></div>
+
+      <div class="actions">
+        <button id="btnPrev" class="btn btn-ghost">Précédent</button>
+        <button id="btnNext" class="btn btn-primary">Suivant</button>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="card hidden">
+      <h2>Résultats</h2>
+      <div id="scoreLine" class="score"></div>
+      <div class="muted small" id="passLine"></div>
+
+      <h3>Revue</h3>
+      <div id="review" class="review"></div>
+
+      <div class="actions">
+        <button id="btnBackSetup" class="btn btn-ghost">Nouvelle session</button>
+        <button id="btnRetryWrong" class="btn btn-primary">Refaire mes erreurs</button>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section id="progress" class="card hidden">
+      <div class="row-between">
+        <h2>Progress</h2>
+        <button id="btnCloseProgress" class="btn btn-ghost">Fermer</button>
+      </div>
+
+      <div class="grid two">
+        <div class="stat">
+          <div class="stat-label">Focus (7 jours)</div>
+          <div class="stat-value" id="focus7">—</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Précision (global)</div>
+          <div class="stat-value" id="accuracyGlobal">—</div>
+        </div>
+      </div>
+
+      <h3>Stats DigComp</h3>
+      <div id="domainStats" class="domain-stats"></div>
+
+      <h3>Calendrier (streak)</h3>
+      <div id="calendar" class="calendar"></div>
+      <div class="muted small">✅ objectif atteint (≥ 60 min) • ◔ partiel • — aucun temps</div>
+    </section>
+
+    <!-- NOTE MODAL -->
+    <div id="noteModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-card">
+        <div class="row-between">
+          <h3>Note</h3>
+          <button id="btnNoteClose" class="btn btn-ghost">Fermer</button>
+        </div>
+        <div class="muted small" id="noteFor"></div>
+        <textarea id="noteText" rows="6" placeholder="Écris une note courte (mnémotechnique, piège, règle...)"></textarea>
+        <div class="actions">
+          <button id="btnNoteSave" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <span>Stockage local (iPhone inclus) • GitHub Pages recommandé • Offline après 1ère ouverture</span>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js");
+    }
+  </script>
+</body>
+</html>
