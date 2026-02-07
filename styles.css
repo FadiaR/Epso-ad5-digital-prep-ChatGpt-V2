@@ -271,45 +271,5 @@ h3{font-size:15px; color:var(--muted); font-weight:700; margin-top:16px}
 }
 code{color: #c7d6ff}
 
-/* Modal */
-.modal{
-  position: fixed;
-  inset: 0;
-  background: rgba(10,47,107,.18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:16px;
-  z-index: 9999;
-  pointer-events: auto;
-}
-.modal::before{
-  content:"";
-  position:absolute;
-  inset:0;
-}
-.modal-card{
-  position: relative;
-  z-index: 10000;
-  width:min(720px, 100%);
-  background: #ffffff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:14px;
-  box-shadow: 0 14px 40px rgba(0,34,77,.18);
-  pointer-events: auto;
-}
-textarea{
-  width:100%;
-  background: #ffffff;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px;
-  color:var(--text);
-  outline:none;
-  font-size:16px; /* iOS zoom */
-  resize:vertical;
-}
-textarea:focus{border-color: rgba(76,125,255,.6)}
 
 button{ touch-action: manipulation; }

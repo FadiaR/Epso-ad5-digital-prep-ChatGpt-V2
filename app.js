@@ -379,8 +379,7 @@ function renderQuestion(){
   // Tools visibility (EPSO simulation): pas de notes / flags en examen ou en strict
   const toolsAllowed = (s.mode === "practice") && !s.strict;
   $("#btnFlag").classList.toggle("hidden", !toolsAllowed);
-  $("#btnNote").classList.toggle("hidden", !toolsAllowed);
-  if(toolsAllowed){
+    if(toolsAllowed){
     $("#btnFlag").textContent = isFlagged(q.id) ? "★ Flag" : "☆ Flag";
   }
 
@@ -509,8 +508,7 @@ function finishSession(timeUp){
       <p class="a">Votre réponse : ${escapeHtml(chosenText)}</p>
       <p class="a">Bonne réponse : ${escapeHtml(correctText)}</p>
       ${q.explanation ? `<p class="a"><em>Explication :</em> ${escapeHtml(q.explanation)}</p>` : ""}
-      ${note ? `<p class="a"><em>Note :</em> ${escapeHtml(note)}</p>` : ""}
-    `;
+          `;
     review.appendChild(item);
   }
 
@@ -747,16 +745,6 @@ function renderProgressPanel(){
   renderCalendar();
 }
 
-/* ---------------- Notes modal ---------------- */
-
-function openNoteModal(q){
-  state.currentModalQid = q.id;
-  $("#noteFor").textContent = q.domain ? `${q.domain} • ${q.id}` : q.id;
-  $("#noteText").value = getNote(q.id);
-  $("#noteModal").classList.remove("hidden");
-  $("#noteModal").setAttribute("aria-hidden", "false");
-  $("#noteText").focus();
-}
 
 function closeNoteModal(){
   state.currentModalQid = null;
@@ -937,13 +925,7 @@ $("#btnFlag").onclick = () => {
     renderQuestion();
   };
 
-  $("#btnNote").onclick = () => {
-    const s = state.session;
-    if(!s) return;
-    if(s.mode !== "practice" || s.strict) return;
-    const q = s.items[s.idx];
-    openNoteModal(q);
-  };
+    };
 
   $("#btnNoteClose").onclick = closeNoteModal;
   $("#btnNoteSave").onclick = () => {
